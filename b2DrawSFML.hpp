@@ -14,10 +14,10 @@ class b2DrawSFML : public b2Draw
 public:
 
     ///
-    b2DrawSFML(sf::Vector2f const& scale) noexcept;
+    b2DrawSFML(sf::Vector2f const& scale = { 1.0f, 1.0f }) noexcept;
 
     ///
-    b2DrawSFML(sf::RenderTarget& renderTarget, sf::Vector2f const& scale) noexcept;
+    b2DrawSFML(sf::RenderTarget& renderTarget, sf::Vector2f const& scale = { 1.0f, 1.0f }) noexcept;
 
     ///
     void SetRenderTarget(sf::RenderTarget& renderTarget) noexcept;
