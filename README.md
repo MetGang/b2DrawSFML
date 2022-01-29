@@ -4,8 +4,7 @@ Implementation of Box2D's b2Draw class for SFML.
 
 ## Dependencies
 
-Obviously these two:
-
+* C++11 capable compiler
 * [SFML](https://github.com/SFML/SFML) (tested on 2.5.1)
 * [Box2D](https://github.com/erincatto/box2d) (tested on 2.4.1)
 
@@ -94,3 +93,11 @@ int main()
     return 0;
 }
 ```
+
+## Scaling
+
+To ensure best precision Box2D uses units called *meters* which is just a fancy name for small floats because floating-point numbers lose precision when the number gets bigger. That's why it's the best to keep size of your physics object in range from 0.0f to 10.0f and then use scale while rendering.
+
+## License
+
+MIT, see [license](/LICENSE) for more information.
