@@ -40,7 +40,7 @@ int main()
     b2DrawSFML drawer{ window, { 10.0f, 10.0f } };
 
     // Set flags for things that should be drawn
-    // ALWAYS rememeber to set at least one flag
+    // ALWAYS remember to set at least one flag,
     // otherwise nothing will be drawn
     drawer.SetFlags(
         b2Draw::e_shapeBit |
