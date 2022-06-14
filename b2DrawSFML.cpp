@@ -18,6 +18,17 @@ b2DrawSFML::b2DrawSFML(sf::RenderTarget& renderTarget, sf::Vector2f const& scale
 
 }
 
+void b2DrawSFML::SetAllFlags() noexcept
+{
+    SetFlags(
+        b2Draw::e_shapeBit |
+        b2Draw::e_jointBit |
+        b2Draw::e_aabbBit |
+        b2Draw::e_pairBit |
+        b2Draw::e_centerOfMassBit
+    );
+}
+
 void b2DrawSFML::SetRenderTarget(sf::RenderTarget& renderTarget) noexcept
 {
     m_renderTarget = &renderTarget;
@@ -90,7 +101,7 @@ void b2DrawSFML::DrawSolidCircle(b2Vec2 const& center, float radius, b2Vec2 cons
 
 void b2DrawSFML::DrawSegment(b2Vec2 const& p1, b2Vec2 const& p2, b2Color const& color) noexcept
 {
-    sf::Vertex line[] = {
+    sf::Vertex const line[] = {
         { M_ToPixels(p1), M_ConvertColor(color) },
         { M_ToPixels(p2), M_ConvertColor(color) }
     };

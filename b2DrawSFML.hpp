@@ -20,6 +20,9 @@ public:
     explicit b2DrawSFML(sf::RenderTarget& renderTarget, sf::Vector2f const& scale = { 1.0f, 1.0f }) noexcept;
 
     ///
+    void SetAllFlags() noexcept;
+
+    ///
     void SetRenderTarget(sf::RenderTarget& renderTarget) noexcept;
 
     ///
