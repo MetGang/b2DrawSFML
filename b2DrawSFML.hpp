@@ -26,7 +26,13 @@ public:
     void SetRenderTarget(sf::RenderTarget& renderTarget) noexcept;
 
     ///
+    sf::RenderTarget& GetRenderTarget() noexcept;
+
+    ///
     void SetScale(sf::Vector2f const& scale) noexcept;
+
+    ///
+    sf::Vector2f const& GetScale() noexcept;
 
     ///
     void DrawPolygon(b2Vec2 const* vertices, int32 vertexCount, b2Color const& color) noexcept;
