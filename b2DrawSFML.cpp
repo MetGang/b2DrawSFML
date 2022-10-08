@@ -1,6 +1,6 @@
 #include <b2DrawSFML.hpp>
 
-b2DrawSFML::b2DrawSFML(sf::Vector2f const& scale) noexcept
+b2DrawSFML::b2DrawSFML(float scale) noexcept
     : m_renderTarget { nullptr }
     , m_convexShape {}
     , m_circleShape {}
@@ -9,7 +9,7 @@ b2DrawSFML::b2DrawSFML(sf::Vector2f const& scale) noexcept
 
 }
 
-b2DrawSFML::b2DrawSFML(sf::RenderTarget& renderTarget, sf::Vector2f const& scale) noexcept
+b2DrawSFML::b2DrawSFML(sf::RenderTarget& renderTarget, float scale) noexcept
     : m_renderTarget { &renderTarget }
     , m_convexShape {}
     , m_circleShape {}
@@ -39,12 +39,12 @@ sf::RenderTarget& b2DrawSFML::GetRenderTarget() noexcept
     return *m_renderTarget;
 }
 
-void b2DrawSFML::SetScale(sf::Vector2f const& scale) noexcept
+void b2DrawSFML::SetScale(float scale) noexcept
 {
     m_scale = scale;
 }
 
-sf::Vector2f const& b2DrawSFML::GetScale() noexcept
+float b2DrawSFML::GetScale() noexcept
 {
     return m_scale;
 }
@@ -87,9 +87,9 @@ void b2DrawSFML::DrawSolidPolygon(b2Vec2 const* vertices, int32 vertexCount, b2C
 
 void b2DrawSFML::DrawCircle(b2Vec2 const& center, float radius, b2Color const& color) noexcept
 {
-    m_circleShape.setRadius(radius);
+    m_circleShape.setRadius(M_ToPixels(radius));
     m_circleShape.setPosition(M_ToPixels(center));
-    m_circleShape.setOrigin({ radius, radius });
+    m_circleShape.setOrigin(M_ToPixels({ radius, radius }));
     m_circleShape.setFillColor(sf::Color::Transparent);
     m_circleShape.setOutlineColor(M_ConvertColor(color));
     m_circleShape.setOutlineThickness(-1.0f);
@@ -99,9 +99,9 @@ void b2DrawSFML::DrawCircle(b2Vec2 const& center, float radius, b2Color const& c
 
 void b2DrawSFML::DrawSolidCircle(b2Vec2 const& center, float radius, b2Vec2 const& /* axis */, b2Color const& color) noexcept
 {
-    m_circleShape.setRadius(radius);
+    m_circleShape.setRadius(M_ToPixels(radius));
     m_circleShape.setPosition(M_ToPixels(center));
-    m_circleShape.setOrigin({ radius, radius });
+    m_circleShape.setOrigin(M_ToPixels({ radius, radius }));
     m_circleShape.setFillColor(M_ConvertColor(color, 0.8f));
     m_circleShape.setOutlineColor(sf::Color::Transparent);
     m_circleShape.setOutlineThickness(0.0f);
@@ -131,9 +131,9 @@ void b2DrawSFML::DrawTransform(b2Transform const& xf) noexcept
 
 void b2DrawSFML::DrawPoint(b2Vec2 const& p, float size, b2Color const& color) noexcept
 {
-    m_circleShape.setRadius(size);
+    m_circleShape.setRadius(M_ToPixels(size));
     m_circleShape.setPosition(M_ToPixels(p));
-    m_circleShape.setOrigin({ size, size });
+    m_circleShape.setOrigin(M_ToPixels({ size, size }));
     m_circleShape.setFillColor(M_ConvertColor(color));
     m_circleShape.setOutlineColor(sf::Color::Transparent);
     m_circleShape.setOutlineThickness(0.0f);
@@ -141,9 +141,14 @@ void b2DrawSFML::DrawPoint(b2Vec2 const& p, float size, b2Color const& color) no
     m_renderTarget->draw(m_circleShape);
 }
 
+float b2DrawSFML::M_ToPixels(float f) const noexcept
+{
+    return f * m_scale;
+}
+
 sf::Vector2f b2DrawSFML::M_ToPixels(b2Vec2 const& p) const noexcept
 {
-    return { p.x * m_scale.x, p.y * m_scale.y };
+    return { p.x * m_scale, p.y * m_scale };
 }
 
 sf::Color b2DrawSFML::M_ConvertColor(b2Color const& color) const noexcept 

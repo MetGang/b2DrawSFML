@@ -14,10 +14,10 @@ class b2DrawSFML : public b2Draw
 public:
 
     ///
-    explicit b2DrawSFML(sf::Vector2f const& scale = { 1.0f, 1.0f }) noexcept;
+    explicit b2DrawSFML(float scale = 1.0f) noexcept;
 
     ///
-    explicit b2DrawSFML(sf::RenderTarget& renderTarget, sf::Vector2f const& scale = { 1.0f, 1.0f }) noexcept;
+    explicit b2DrawSFML(sf::RenderTarget& renderTarget, float scale = 1.0f) noexcept;
 
     ///
     void SetAllFlags() noexcept;
@@ -29,10 +29,10 @@ public:
     sf::RenderTarget& GetRenderTarget() noexcept;
 
     ///
-    void SetScale(sf::Vector2f const& scale) noexcept;
+    void SetScale(float scale) noexcept;
 
     ///
-    sf::Vector2f const& GetScale() noexcept;
+    float GetScale() noexcept;
 
     ///
     void DrawPolygon(b2Vec2 const* vertices, int32 vertexCount, b2Color const& color) noexcept;
@@ -58,6 +58,9 @@ public:
 private:
 
     /// PRIV:
+    float M_ToPixels(float f) const noexcept;
+
+    /// PRIV:
     sf::Vector2f M_ToPixels(b2Vec2 const& p) const noexcept;
 
     /// PRIV:
@@ -69,5 +72,5 @@ private:
     sf::RenderTarget* m_renderTarget;
     sf::ConvexShape m_convexShape;
     sf::CircleShape m_circleShape;
-    sf::Vector2f m_scale;
+    float m_scale;
 };
