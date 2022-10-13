@@ -131,14 +131,7 @@ void b2DrawSFML::DrawTransform(b2Transform const& xf) noexcept
 
 void b2DrawSFML::DrawPoint(b2Vec2 const& p, float size, b2Color const& color) noexcept
 {
-    m_circleShape.setRadius(M_ToPixels(size));
-    m_circleShape.setPosition(M_ToPixels(p));
-    m_circleShape.setOrigin(M_ToPixels({ size, size }));
-    m_circleShape.setFillColor(M_ConvertColor(color));
-    m_circleShape.setOutlineColor(sf::Color::Transparent);
-    m_circleShape.setOutlineThickness(0.0f);
-
-    m_renderTarget->draw(m_circleShape);
+    DrawSolidCircle(p, size, {}, color);
 }
 
 float b2DrawSFML::M_ToPixels(float f) const noexcept
